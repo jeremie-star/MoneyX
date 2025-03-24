@@ -1,0 +1,11 @@
+###fecth
+POST :http://localhost:8000/convert
+
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "from": "USD",
+    "to": "EUR",
+    "amount": 100
+}

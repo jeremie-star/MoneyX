@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-exchange-alt"></i> Currency Converter</h1>
+            <p>Real-time exchange rates and historical data</p>
+        </header>
+
+        <div class="converter-container">
+            <div class="converter-form">
+                <div class="input-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" placeholder="0.0" min="0" step="0.01">
+                </div>
+
+                <div class="currency-selectors">
+                    <div class="input-group">
+                        <label for="from-currency">From</label>
+                        <select id="from-currency"></select>
+                    </div>
+
+                    <button id="swap-currencies" class="swap-btn" title="Swap currencies">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+
+                    <div class="input-group">
+                        <label for="to-currency">To</label>
+                        <select id="to-currency"></select>
+                    </div>
+                </div>
+
+                <button id="convert-btn" class="action-btn">Convert</button>
+            </div>
+
+            <div class="result-container">
+                <div id="conversion-result" class="hidden">
+                    <h3>Conversion Result</h3>
+                    <div class="result-display">
+                        <span id="from-amount">0</span> <span id="from-curr">USD</span> =
+                        <span id="to-amount">0</span> <span id="to-curr">EUR</span>
+                    </div>
+                    <p class="rate-info">1 <span id="rate-from">USD</span> = <span id="rate-value">0</span> <span id="rate-to">EUR</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="historical-container">
+            <h2>Historical Rates</h2>
+            <div class="historical-form">
+                <div class="input-group">
+                    <label for="historical-days">Days </label>
+                    <input type="number" id="historical-days" placeholder="30" min="1" max="365" value="30">
+                </div>
+                <button id="historical-btn" class="action-btn">Get Historical Data Over time</button>
+            </div>
+            <div id="chart-container" class="hidden">
+                <canvas id="historical-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Exchange rates provided Jeremie with the help of <a href="https://www.exchangerate-api.com" target="_blank">ExchangeRate-API</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
