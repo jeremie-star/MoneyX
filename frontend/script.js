@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function initApp() {
         try {
             console.log("Initializing app...");
-            
+            const apiKey = '3842e4587c7db7b02e1d0862';
             // First try to load currencies from backend
-            const response = await fetch('http://3.83.255.189:8000/currencies');
+            const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/codes`);
             
             console.log("Currency response status:", response.status);
             if (!response.ok) {
@@ -101,63 +101,59 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
     
-    // Convert currency
-    async function convertCurrency() {
-        const amount = parseFloat(amountInput.value);
-        const fromCurrency = fromCurrencySelect.value;
-        const toCurrency = toCurrencySelect.value;
+ // Convert currency
+async function convertCurrency() {
+    const amount = parseFloat(amountInput.value);
+    const fromCurrency = fromCurrencySelect.value;
+    const toCurrency = toCurrencySelect.value;
+    
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid positive amount');
+        return;
+    }
+    
+    if (fromCurrency === toCurrency) {
+        alert('Please select different currencies');
+        return;
+    }
+    
+    try {
+        console.log(`Converting ${amount} ${fromCurrency} to ${toCurrency}`);
+        const apiKey = '3842e4587c7db7b02e1d0862';
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCurrency}/${toCurrency}/${amount}`);
         
-        if (isNaN(amount) || amount <= 0) {
-            alert('Please enter a valid positive amount');
-            return;
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Conversion error response:", errorData);
+            throw new Error(errorData.detail || 'Conversion failed');
         }
         
-        if (fromCurrency === toCurrency) {
-            alert('Please select different currencies');
-            return;
-        }
+        const data = await response.json();
+        console.log("Full API response:", data);  // Log the full response
         
-        try {
-            console.log(`Converting ${amount} ${fromCurrency} to ${toCurrency}`);
-            
-            const response = await fetch('http://3.83.255.189:8000/convert', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    from_currency: fromCurrency,
-                    to_currency: toCurrency,
-                    amount: amount
-                })
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("Conversion error response:", errorData);
-                throw new Error(errorData.detail || 'Conversion failed');
-            }
-            
-            const data = await response.json();
-            console.log("Conversion result:", data);
-            
+        // Check if the conversion_result field exists and is a valid number
+        if (data.conversion_result && !isNaN(data.conversion_result)) {
             // Display results
             fromAmountSpan.textContent = amount.toFixed(2);
             fromCurrSpan.textContent = fromCurrency;
-            toAmountSpan.textContent = data.result.toFixed(2);
+            toAmountSpan.textContent = data.conversion_result.toFixed(2); // Use conversion_result here
             toCurrSpan.textContent = toCurrency;
             rateFromSpan.textContent = fromCurrency;
             rateToSpan.textContent = toCurrency;
-            rateValueSpan.textContent = data.rate.toFixed(6);
+            rateValueSpan.textContent = data.conversion_rate.toFixed(6); // Use conversion_rate here
             
             conversionResult.classList.remove('hidden');
-            
-        } catch (error) {
-            console.error('Conversion error:', error);
-            alert(`Error converting currency: ${error.message}`);
+        } else {
+            console.error("Unexpected API response format:", data);
+            throw new Error('Invalid conversion result');
         }
+        
+    } catch (error) {
+        console.error('Conversion error:', error);
+        alert(`Error converting currency: ${error.message}`);
     }
-    
+}
+
     // Swap currencies
     function swapCurrencies() {
         const temp = fromCurrencySelect.value;
