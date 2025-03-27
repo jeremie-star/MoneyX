@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             console.log("Initializing app...");
             
             // First try to load currencies from backend
-            const response = await fetch('http://localhost:8000/currencies');
+            const response = await fetch('http://3.83.255.189:8000/currencies');
             
             console.log("Currency response status:", response.status);
             if (!response.ok) {
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             console.log(`Converting ${amount} ${fromCurrency} to ${toCurrency}`);
             
-            const response = await fetch('http://localhost:8000/convert', {
+            const response = await fetch('http://3.83.255.189:8000/convert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             console.log(`Fetching historical data for ${fromCurrency}-${toCurrency} for ${days} days`);
             
-            const response = await fetch('http://localhost:8000/historical', {
+            const response = await fetch('http://3.83.255.189:8000/historical', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
