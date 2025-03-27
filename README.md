@@ -61,31 +61,4 @@ The app communicates with the following API endpoints:
      }
    ]
    ```
-
-### `POST /historical`
-- **Description**: Fetches historical exchange rates for a specific currency pair over a set number of days.
-- **Body**:
-   ```json
-   {
-     "from_currency": "USD",
-     "to_currency": "EUR",
-     "days": 7
-   }
-   ```
-- **Response**:  
-   ```json
-   [
-     {
-       "date": "2025-03-17",
-       "rate": 0.84
-     },
-     {
-       "date": "2025-03-16",
-       "rate": 0.83
-     }
-   ]
-   ```
-
-
-
 You can replace the placeholders like "yourusername" with the actual GitHub username and adjust any other project-specific details. Let me know if you’d like to customize it further!
