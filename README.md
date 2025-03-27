@@ -10,7 +10,6 @@ This is a currency exchange rate tracker application that fetches real-time exch
 
 ## **Tech Stack**
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: python
 - **API**: RESTful API to fetch exchange rates and historical data
 
 ## **Installation**
@@ -27,22 +26,6 @@ This is a currency exchange rate tracker application that fetches real-time exch
    ```
 
 3. Open `index.html` in a browser or use a local server to view the app.
-
-### **Backend Setup (Optional)**
-If you want to run the backend locally to serve exchange rate data:
-
-1. Clone the backend repository (if separate) or navigate to your backend folder.
-2. Install the required packages:
-   ```bash
-   npm install
-   ```
-
-3. Run the backend server:
-   ```bash
-   python3 main.py
-   ```
-
-4. The backend should be running on `http://localhost:8000`.
 
 ## **How It Works**
 
@@ -103,23 +86,6 @@ The app communicates with the following API endpoints:
    ]
    ```
 
-## **Contributing**
-Contributions are welcome! If you'd like to improve this project, feel free to fork the repository and create a pull request. Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`.
-3. Make your changes.
-4. Commit your changes: `git commit -m 'Add your changes'`.
-5. Push to your branch: `git push origin feature/your-feature-name`.
-6. Create a pull request.
-
-## **License**
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## **Acknowledgements**
-- [Chart.js](https://www.chartjs.org/) for chart rendering.
-- External currency exchange rate API used for real-time data.
-
----
 
 You can replace the placeholders like "yourusername" with the actual GitHub username and adjust any other project-specific details. Let me know if you’d like to customize it further!
